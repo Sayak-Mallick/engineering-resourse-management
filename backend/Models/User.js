@@ -17,14 +17,53 @@ const UserSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ['admin', 'user'],
+    enum: ['admin', 'project_manager', 'team_lead', 'engineer', 'user'],
     default: 'user'
   },
+  skills: [{
+    type: String
+  }],
+  experience: {
+    type: Number,
+    default: 0
+  },
+  hourlyRate: {
+    type: Number,
+    default: 0
+  },
+  availability: {
+    type: String,
+    enum: ['available', 'partially_available', 'unavailable'],
+    default: 'available'
+  },
+  department: {
+    type: String,
+    default: 'Engineering'
+  },
+  phone: {
+    type: String
+  },
+  location: {
+    type: String
+  },
+  bio: {
+    type: String
+  },
   createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
     type: Date,
     default: Date.now
   }
 })
 
+// Update the updatedAt field before saving
+UserSchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
 const UserModel = mongoose.model("users", UserSchema);
-module.exports = UserModel; // This model represents the User schema in the MongoDB database. It includes fields for name,
+module.exports = UserModel;

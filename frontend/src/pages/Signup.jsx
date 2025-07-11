@@ -9,7 +9,15 @@ const Signup = () => {
     name: '',
     email: '',
     password: '',
-    role: ''
+    role: '',
+    skills: '',
+    experience: '',
+    hourlyRate: '',
+    availability: '',
+    department: '',
+    phone: '',
+    location: '',
+    bio: ''
   });
   const navigate = useNavigate();
 
@@ -28,7 +36,7 @@ const Signup = () => {
       return notifySuccess("Please fill in all the required fields.");
     }
     try {
-      const url = 'https://engineering-resourse-management.vercel.app/auth/signup';
+      const url = 'http://localhost:8080/auth/signup';
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -47,7 +55,15 @@ const Signup = () => {
           name: '',
           email: '',
           password: '',
-          role: ''
+          role: '',
+          skills: '',
+          experience: '',
+          hourlyRate: '',
+          availability: '',
+          department: '',
+          phone: '',
+          location: '',
+          bio: ''
         });
       } else if (error) {
         const details = error?.details[0]?.message;
@@ -144,6 +160,119 @@ const Signup = () => {
                 <option value="admin">Admin</option>
                 <option value="user">User</option>
               </select>
+            </div>
+            {/* Skills Field */}
+            <div className="space-y-3">
+              <label className="block text-lg font-semibold text-gray-800 tracking-tight">
+                Skills (comma separated)
+              </label>
+              <input
+                type="text"
+                name="skills"
+                className="w-full px-8 py-5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 outline-none text-lg bg-gray-50/50 focus:bg-white hover:border-gray-300 shadow-sm focus:shadow-lg placeholder:text-gray-400"
+                placeholder="e.g. React, Node.js, MongoDB"
+                onChange={handleInputChange}
+                value={signupData.skills || ''}
+              />
+            </div>
+            {/* Experience Field */}
+            <div className="space-y-3">
+              <label className="block text-lg font-semibold text-gray-800 tracking-tight">
+                Experience (years)
+              </label>
+              <input
+                type="number"
+                name="experience"
+                className="w-full px-8 py-5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 outline-none text-lg bg-gray-50/50 focus:bg-white hover:border-gray-300 shadow-sm focus:shadow-lg placeholder:text-gray-400"
+                placeholder="Years of experience"
+                onChange={handleInputChange}
+                value={signupData.experience || ''}
+              />
+            </div>
+            {/* Hourly Rate Field */}
+            <div className="space-y-3">
+              <label className="block text-lg font-semibold text-gray-800 tracking-tight">
+                Hourly Rate
+              </label>
+              <input
+                type="number"
+                name="hourlyRate"
+                className="w-full px-8 py-5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 outline-none text-lg bg-gray-50/50 focus:bg-white hover:border-gray-300 shadow-sm focus:shadow-lg placeholder:text-gray-400"
+                placeholder="Hourly rate"
+                onChange={handleInputChange}
+                value={signupData.hourlyRate || ''}
+              />
+            </div>
+            {/* Availability Field */}
+            <div className="space-y-3">
+              <label className="block text-lg font-semibold text-gray-800 tracking-tight">
+                Availability
+              </label>
+              <select
+                name="availability"
+                onChange={handleInputChange}
+                value={signupData.availability || 'available'}
+                className="w-full px-8 py-5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 outline-none text-lg bg-gray-50/50 focus:bg-white hover:border-gray-300 shadow-sm focus:shadow-lg cursor-pointer"
+              >
+                <option value="available">Available</option>
+                <option value="partially_available">Partially Available</option>
+                <option value="unavailable">Unavailable</option>
+              </select>
+            </div>
+            {/* Department Field */}
+            <div className="space-y-3">
+              <label className="block text-lg font-semibold text-gray-800 tracking-tight">
+                Department
+              </label>
+              <input
+                type="text"
+                name="department"
+                className="w-full px-8 py-5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 outline-none text-lg bg-gray-50/50 focus:bg-white hover:border-gray-300 shadow-sm focus:shadow-lg placeholder:text-gray-400"
+                placeholder="Department"
+                onChange={handleInputChange}
+                value={signupData.department || ''}
+              />
+            </div>
+            {/* Phone Field */}
+            <div className="space-y-3">
+              <label className="block text-lg font-semibold text-gray-800 tracking-tight">
+                Phone
+              </label>
+              <input
+                type="text"
+                name="phone"
+                className="w-full px-8 py-5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 outline-none text-lg bg-gray-50/50 focus:bg-white hover:border-gray-300 shadow-sm focus:shadow-lg placeholder:text-gray-400"
+                placeholder="Phone number"
+                onChange={handleInputChange}
+                value={signupData.phone || ''}
+              />
+            </div>
+            {/* Location Field */}
+            <div className="space-y-3">
+              <label className="block text-lg font-semibold text-gray-800 tracking-tight">
+                Location
+              </label>
+              <input
+                type="text"
+                name="location"
+                className="w-full px-8 py-5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 outline-none text-lg bg-gray-50/50 focus:bg-white hover:border-gray-300 shadow-sm focus:shadow-lg placeholder:text-gray-400"
+                placeholder="Location"
+                onChange={handleInputChange}
+                value={signupData.location || ''}
+              />
+            </div>
+            {/* Bio Field */}
+            <div className="space-y-3">
+              <label className="block text-lg font-semibold text-gray-800 tracking-tight">
+                Bio
+              </label>
+              <textarea
+                name="bio"
+                className="w-full px-8 py-5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 outline-none text-lg bg-gray-50/50 focus:bg-white hover:border-gray-300 shadow-sm focus:shadow-lg placeholder:text-gray-400"
+                placeholder="Short bio"
+                onChange={handleInputChange}
+                value={signupData.bio || ''}
+              />
             </div>
 
             {/* Submit Button */}

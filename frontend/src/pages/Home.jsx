@@ -22,6 +22,10 @@ const Home = () => {
     }, 1000);
   };
 
+  const goToDashboard = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-100 flex items-center justify-center p-6">
       <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 px-12 py-16 max-w-xl w-full text-center space-y-8">
@@ -31,12 +35,20 @@ const Home = () => {
         <p className="text-gray-600 text-lg">
           You're successfully logged in. Explore the platform or log out when you're done.
         </p>
-        <button
-          onClick={handleLogout}
-          className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white font-semibold text-xl py-4 px-8 rounded-xl hover:from-blue-700 hover:via-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transform hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-[0.98]"
-        >
-          Logout
-        </button>
+        <div className="flex gap-4">
+          <button
+            onClick={goToDashboard}
+            className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white font-semibold text-xl py-4 px-8 rounded-xl hover:from-blue-700 hover:via-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transform hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-[0.98]"
+          >
+            Go to Dashboard
+          </button>
+          <button
+            onClick={handleLogout}
+            className="bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold text-xl py-4 px-8 rounded-xl hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 transform hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-[0.98]"
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
       <ToastContainer

@@ -28,7 +28,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch('https://engineering-resourse-management.vercel.app/auth/login', {
+      const response = await fetch('http://localhost:8080/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -37,14 +37,15 @@ const Login = () => {
       });
 
       const result = await response.json();
-      const { success, message, jwtToken,name, error, } = result;
+      const { success, message, jwtToken, name, role, error } = result;
       if (success) {
         notifySuccess(message || 'Login successful!');
         localStorage.setItem('token', jwtToken);
         localStorage.setItem('loggenInUser', name);
+        localStorage.setItem('userRole', role);
         // Store token or user info if needed
         setTimeout(() => {
-          navigate('/home');
+          navigate('/dashboard');
         }, 1000);
         setLoginData({ email: '', password: '' });
       } else if (error) {
