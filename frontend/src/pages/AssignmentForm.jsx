@@ -20,6 +20,7 @@ const AssignmentForm = () => {
   const [projects, setProjects] = useState([]);
   const navigate = useNavigate();
   const isEdit = Boolean(id);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchEngineers();
@@ -89,6 +90,7 @@ const AssignmentForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setLoading(true);
     const token = localStorage.getItem('token');
     const payload = {
       ...form,
@@ -113,6 +115,8 @@ const AssignmentForm = () => {
       }
     } catch (err) {
       notifyError('Error saving assignment',err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -142,7 +146,7 @@ const AssignmentForm = () => {
         <input name="hoursAllocated" value={form.hoursAllocated} onChange={handleChange} placeholder="Hours Allocated" className="w-full border p-2 rounded" type="number" />
         <input name="hourlyRate" value={form.hourlyRate} onChange={handleChange} placeholder="Hourly Rate" className="w-full border p-2 rounded" type="number" />
         <textarea name="notes" value={form.notes} onChange={handleChange} placeholder="Notes" className="w-full border p-2 rounded" />
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">{isEdit ? 'Update' : 'Create'}</button>
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded" disabled={loading}>{loading ? 'Saving...' : (isEdit ? 'Update' : 'Create')}</button>
         <button type="button" onClick={() => navigate('/assignments')} className="bg-gray-400 text-white px-4 py-2 rounded ml-2">Cancel</button>
       </form>
       <ToastContainer />

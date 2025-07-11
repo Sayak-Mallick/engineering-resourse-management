@@ -8,6 +8,7 @@ const Projects = () => {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [deletingId, setDeletingId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const Projects = () => {
     if (!window.confirm('Are you sure you want to delete this project?')) {
       return;
     }
-
+    setDeletingId(projectId);
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`https://engineering-resourse-management.vercel.app/projects/${projectId}`, {
@@ -50,7 +51,6 @@ const Projects = () => {
           'Authorization': `Bearer ${token}`
         }
       });
-
       if (response.ok) {
         notifySuccess('Project deleted successfully');
         fetchProjects();
@@ -60,6 +60,8 @@ const Projects = () => {
     } catch (error) {
       console.error('Delete error:', error);
       notifyError('Error deleting project');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -243,8 +245,9 @@ const Projects = () => {
                   <button
                     onClick={() => handleDeleteProject(project._id)}
                     className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors text-sm"
+                    disabled={deletingId === project._id}
                   >
-                    Delete
+                    {deletingId === project._id ? 'Deleting...' : 'Delete'}
                   </button>
                 </div>
               </div>

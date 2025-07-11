@@ -7,6 +7,7 @@ const EngineerView = () => {
   const { id } = useParams();
   const [engineer, setEngineer] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [editLoading, setEditLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const EngineerView = () => {
       <div className="mb-2">Location: {engineer.location}</div>
       <div className="mb-2">Bio: {engineer.bio}</div>
       <div className="mt-6 flex gap-2">
-        <button onClick={() => navigate(`/engineers/${engineer._id}/edit`)} className="bg-green-600 text-white px-4 py-2 rounded">Edit</button>
+        <button onClick={() => { setEditLoading(true); navigate(`/engineers/${engineer._id}/edit`); }} className="bg-green-600 text-white px-4 py-2 rounded" disabled={editLoading}>{editLoading ? 'Loading...' : 'Edit'}</button>
         <button onClick={() => navigate('/engineers')} className="bg-gray-400 text-white px-4 py-2 rounded">Back</button>
       </div>
       <ToastContainer />

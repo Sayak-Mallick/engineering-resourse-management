@@ -6,6 +6,7 @@ import { notifyError, notifySuccess } from '../utils';
 const Assignments = () => {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [deletingId, setDeletingId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +36,7 @@ const Assignments = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this assignment?')) return;
+    setDeletingId(id);
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`https://engineering-resourse-management.vercel.app/assignments/${id}`, {
@@ -49,6 +51,8 @@ const Assignments = () => {
       }
     } catch (error) {
       notifyError('Error deleting assignment',error);
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -85,7 +89,9 @@ const Assignments = () => {
                 <td className="p-2 border flex gap-2">
                   <button onClick={() => navigate(`/assignments/${a._id}`)} className="bg-blue-500 text-white px-2 py-1 rounded">View</button>
                   <button onClick={() => navigate(`/assignments/${a._id}/edit`)} className="bg-green-500 text-white px-2 py-1 rounded">Edit</button>
-                  <button onClick={() => handleDelete(a._id)} className="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
+                  <button onClick={() => handleDelete(a._id)} className="bg-red-500 text-white px-2 py-1 rounded" disabled={deletingId === a._id}>
+                    {deletingId === a._id ? 'Deleting...' : 'Delete'}
+                  </button>
                 </td>
               </tr>
             ))}

@@ -8,6 +8,7 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,9 +22,11 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const { email, password } = loginData;
 
     if (!email || !password) {
+      setLoading(false);
       return notifyError("Please enter both email and password.");
     }
 
@@ -58,6 +61,8 @@ const Login = () => {
     } catch (err) {
       console.error("Login error:", err);
       notifyError("An error occurred during login. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -109,8 +114,9 @@ const Login = () => {
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white py-6 px-8 rounded-xl font-bold text-xl hover:from-blue-700 hover:via-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transform hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loading}
             >
-              Login
+              {loading ? 'Logging in...' : 'Login'}
             </button>
           </form>
 

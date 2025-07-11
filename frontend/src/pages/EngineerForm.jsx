@@ -19,6 +19,7 @@ const EngineerForm = () => {
     location: '',
     bio: ''
   });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const isEdit = Boolean(id);
 
@@ -62,6 +63,7 @@ const EngineerForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setLoading(true);
     const token = localStorage.getItem('token');
     const payload = {
       ...form,
@@ -71,6 +73,7 @@ const EngineerForm = () => {
     };
     if (!isEdit && !form.password) {
       notifyError('Password is required for new engineer');
+      setLoading(false);
       return;
     }
     if (isEdit) delete payload.password;
@@ -91,6 +94,8 @@ const EngineerForm = () => {
       }
     } catch (err) {
       notifyError('Error saving engineer',err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -117,7 +122,7 @@ const EngineerForm = () => {
         <input name="phone" value={form.phone} onChange={handleChange} placeholder="Phone" className="w-full border p-2 rounded" />
         <input name="location" value={form.location} onChange={handleChange} placeholder="Location" className="w-full border p-2 rounded" />
         <textarea name="bio" value={form.bio} onChange={handleChange} placeholder="Bio" className="w-full border p-2 rounded" />
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">{isEdit ? 'Update' : 'Add'}</button>
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded" disabled={loading}>{loading ? 'Saving...' : (isEdit ? 'Update' : 'Add')}</button>
         <button type="button" onClick={() => navigate('/engineers')} className="bg-gray-400 text-white px-4 py-2 rounded ml-2">Cancel</button>
       </form>
       <ToastContainer />

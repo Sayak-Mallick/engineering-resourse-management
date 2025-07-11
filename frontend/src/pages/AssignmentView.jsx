@@ -7,6 +7,7 @@ const AssignmentView = () => {
   const { id } = useParams();
   const [assignment, setAssignment] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [editLoading, setEditLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const AssignmentView = () => {
       <div className="mb-2">Hourly Rate: ${assignment.hourlyRate}</div>
       <div className="mb-2">Notes: {assignment.notes}</div>
       <div className="mt-6 flex gap-2">
-        <button onClick={() => navigate(`/assignments/${assignment._id}/edit`)} className="bg-green-600 text-white px-4 py-2 rounded">Edit</button>
+        <button onClick={() => { setEditLoading(true); navigate(`/assignments/${assignment._id}/edit`); }} className="bg-green-600 text-white px-4 py-2 rounded" disabled={editLoading}>{editLoading ? 'Loading...' : 'Edit'}</button>
         <button onClick={() => navigate('/assignments')} className="bg-gray-400 text-white px-4 py-2 rounded">Back</button>
       </div>
       <ToastContainer />

@@ -8,6 +8,7 @@ const Engineers = () => {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [deletingId, setDeletingId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const Engineers = () => {
     if (!window.confirm('Are you sure you want to delete this engineer?')) {
       return;
     }
-
+    setDeletingId(engineerId);
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`https://engineering-resourse-management.vercel.app/users/${engineerId}`, {
@@ -50,7 +51,6 @@ const Engineers = () => {
           'Authorization': `Bearer ${token}`
         }
       });
-
       if (response.ok) {
         notifySuccess('Engineer deleted successfully');
         fetchEngineers();
@@ -60,6 +60,8 @@ const Engineers = () => {
     } catch (error) {
       console.error('Delete error:', error);
       notifyError('Error deleting engineer');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -245,8 +247,9 @@ const Engineers = () => {
                   <button
                     onClick={() => handleDeleteEngineer(engineer._id)}
                     className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors text-sm"
+                    disabled={deletingId === engineer._id}
                   >
-                    Delete
+                    {deletingId === engineer._id ? 'Deleting...' : 'Delete'}
                   </button>
                 </div>
               </div>

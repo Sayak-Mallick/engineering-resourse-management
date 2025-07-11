@@ -16,6 +16,7 @@ const ProjectForm = () => {
     projectManager: ''
   });
   const [managers, setManagers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const isEdit = Boolean(id);
 
@@ -70,6 +71,7 @@ const ProjectForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setLoading(true);
     const token = localStorage.getItem('token');
     const payload = {
       ...form,
@@ -93,6 +95,8 @@ const ProjectForm = () => {
       }
     } catch (err) {
       notifyError('Error saving project',err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -118,7 +122,7 @@ const ProjectForm = () => {
           <option value="">Select Project Manager</option>
           {managers.map(m => <option key={m._id} value={m._id}>{m.name} ({m.email})</option>)}
         </select>
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">{isEdit ? 'Update' : 'Create'}</button>
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded" disabled={loading}>{loading ? 'Saving...' : (isEdit ? 'Update' : 'Create')}</button>
         <button type="button" onClick={() => navigate('/projects')} className="bg-gray-400 text-white px-4 py-2 rounded ml-2">Cancel</button>
       </form>
       <ToastContainer />

@@ -19,6 +19,7 @@ const Signup = () => {
     location: '',
     bio: ''
   });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -31,8 +32,10 @@ const Signup = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    setLoading(true);
     const { name, email, password, role } = signupData;
     if (!name || !email || !password || !role) {
+      setLoading(false);
       return notifySuccess("Please fill in all the required fields.");
     }
     try {
@@ -77,6 +80,8 @@ const Signup = () => {
     } catch (error) {
       notifyError("An error occurred during signup. Please try again later.");
       console.error("Signup error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -279,8 +284,9 @@ const Signup = () => {
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white py-6 px-8 rounded-xl font-bold text-xl hover:from-blue-700 hover:via-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transform hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loading}
             >
-              Create Account
+              {loading ? 'Creating Account...' : 'Create Account'}
             </button>
           </form>
           {/* Toast Container for Notifications */}
