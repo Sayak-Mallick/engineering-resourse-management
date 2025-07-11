@@ -28,7 +28,7 @@ const ProjectForm = () => {
   const fetchManagers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('https://engineering-resourse-management.vercel.app/users/project-managers', {
+      const res = await fetch('https://erm-api.onrender.com/users/project-managers', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -43,7 +43,7 @@ const ProjectForm = () => {
   const fetchProject = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`https://engineering-resourse-management.vercel.app/projects/${id}`, {
+      const res = await fetch(`https://erm-api.onrender.com/projects/${id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -79,7 +79,7 @@ const ProjectForm = () => {
       technologies: form.technologies.split(',').map(t => t.trim())
     };
     try {
-      const url = isEdit ? `https://engineering-resourse-management.vercel.app/projects/${id}` : 'https://engineering-resourse-management.vercel.app/projects';
+      const url = isEdit ? `https://erm-api.onrender.com/projects/${id}` : 'https://erm-api.onrender.com/projects';
       const method = isEdit ? 'PUT' : 'POST';
       const res = await fetch(url, {
         method,

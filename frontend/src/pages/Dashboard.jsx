@@ -25,7 +25,7 @@ const Dashboard = () => {
   const fetchDashboardData = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://engineering-resourse-management.vercel.app/dashboard/stats', {
+      const response = await fetch('https://erm-api.onrender.com/dashboard/stats', {
         headers: {
           'Authorization': `Bearer ${token}`
         }

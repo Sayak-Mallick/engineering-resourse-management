@@ -17,7 +17,7 @@ const EngineerView = () => {
   const fetchEngineer = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://engineering-resourse-management.vercel.app/users/${id}`, {
+      const response = await fetch(`https://erm-api.onrender.com/users/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

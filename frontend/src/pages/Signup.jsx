@@ -39,7 +39,7 @@ const Signup = () => {
       return notifySuccess("Please fill in all the required fields.");
     }
     try {
-      const url = 'https://engineering-resourse-management.vercel.app/auth/signup';
+      const url = 'https://erm-api.onrender.com/auth/signup';
       const response = await fetch(url, {
         method: 'POST',
         headers: {

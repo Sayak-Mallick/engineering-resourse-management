@@ -18,7 +18,7 @@ const Projects = () => {
   const fetchProjects = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://engineering-resourse-management.vercel.app/projects', {
+      const response = await fetch('https://erm-api.onrender.com/projects', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -45,7 +45,7 @@ const Projects = () => {
     setDeletingId(projectId);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://engineering-resourse-management.vercel.app/projects/${projectId}`, {
+      const response = await fetch(`https://erm-api.onrender.com/projects/${projectId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

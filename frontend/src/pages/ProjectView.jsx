@@ -17,7 +17,7 @@ const ProjectView = () => {
   const fetchProject = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://engineering-resourse-management.vercel.app/projects/${id}`, {
+      const response = await fetch(`https://erm-api.onrender.com/projects/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

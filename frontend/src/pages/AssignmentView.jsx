@@ -17,7 +17,7 @@ const AssignmentView = () => {
   const fetchAssignment = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://engineering-resourse-management.vercel.app/assignments/${id}`, {
+      const response = await fetch(`https://erm-api.onrender.com/assignments/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

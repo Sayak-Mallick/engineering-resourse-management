@@ -18,7 +18,7 @@ const Engineers = () => {
   const fetchEngineers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://engineering-resourse-management.vercel.app/users/engineers', {
+      const response = await fetch('https://erm-api.onrender.com/users/engineers', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -45,7 +45,7 @@ const Engineers = () => {
     setDeletingId(engineerId);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://engineering-resourse-management.vercel.app/users/${engineerId}`, {
+      const response = await fetch(`https://erm-api.onrender.com/users/${engineerId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
