@@ -36,7 +36,7 @@ const Signup = () => {
       return notifySuccess("Please fill in all the required fields.");
     }
     try {
-      const url = 'http://localhost:8080/auth/signup';
+      const url = 'https://engineering-resourse-management.vercel.app/auth/signup';
       const response = await fetch(url, {
         method: 'POST',
         headers: {

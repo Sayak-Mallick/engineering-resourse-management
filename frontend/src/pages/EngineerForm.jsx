@@ -29,7 +29,7 @@ const EngineerForm = () => {
   const fetchEngineer = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8080/users/${id}`, {
+      const res = await fetch(`https://engineering-resourse-management.vercel.app/users/${id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -75,7 +75,7 @@ const EngineerForm = () => {
     }
     if (isEdit) delete payload.password;
     try {
-      const url = isEdit ? `http://localhost:8080/users/${id}` : 'http://localhost:8080/auth/signup';
+      const url = isEdit ? `https://engineering-resourse-management.vercel.app/users/${id}` : 'https://engineering-resourse-management.vercel.app/auth/signup';
       const method = isEdit ? 'PUT' : 'POST';
       const res = await fetch(url, {
         method,

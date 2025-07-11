@@ -30,7 +30,7 @@ const AssignmentForm = () => {
   const fetchEngineers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:8080/users/engineers', {
+      const res = await fetch('https://engineering-resourse-management.vercel.app/users/engineers', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -45,7 +45,7 @@ const AssignmentForm = () => {
   const fetchProjects = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:8080/projects', {
+      const res = await fetch('https://engineering-resourse-management.vercel.app/projects', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -60,7 +60,7 @@ const AssignmentForm = () => {
   const fetchAssignment = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8080/assignments/${id}`, {
+      const res = await fetch(`https://engineering-resourse-management.vercel.app/assignments/${id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -97,7 +97,7 @@ const AssignmentForm = () => {
       hourlyRate: Number(form.hourlyRate)
     };
     try {
-      const url = isEdit ? `http://localhost:8080/assignments/${id}` : 'http://localhost:8080/assignments';
+      const url = isEdit ? `https://engineering-resourse-management.vercel.app/assignments/${id}` : 'https://engineering-resourse-management.vercel.app/assignments';
       const method = isEdit ? 'PUT' : 'POST';
       const res = await fetch(url, {
         method,

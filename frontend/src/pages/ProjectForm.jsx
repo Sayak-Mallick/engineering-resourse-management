@@ -27,7 +27,7 @@ const ProjectForm = () => {
   const fetchManagers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:8080/users/project-managers', {
+      const res = await fetch('https://engineering-resourse-management.vercel.app/users/project-managers', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -42,7 +42,7 @@ const ProjectForm = () => {
   const fetchProject = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8080/projects/${id}`, {
+      const res = await fetch(`https://engineering-resourse-management.vercel.app/projects/${id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -77,7 +77,7 @@ const ProjectForm = () => {
       technologies: form.technologies.split(',').map(t => t.trim())
     };
     try {
-      const url = isEdit ? `http://localhost:8080/projects/${id}` : 'http://localhost:8080/projects';
+      const url = isEdit ? `https://engineering-resourse-management.vercel.app/projects/${id}` : 'https://engineering-resourse-management.vercel.app/projects';
       const method = isEdit ? 'PUT' : 'POST';
       const res = await fetch(url, {
         method,

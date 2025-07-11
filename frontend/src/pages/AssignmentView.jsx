@@ -16,7 +16,7 @@ const AssignmentView = () => {
   const fetchAssignment = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8080/assignments/${id}`, {
+      const response = await fetch(`https://engineering-resourse-management.vercel.app/assignments/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

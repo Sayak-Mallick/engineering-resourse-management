@@ -17,7 +17,7 @@ const Engineers = () => {
   const fetchEngineers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8080/users/engineers', {
+      const response = await fetch('https://engineering-resourse-management.vercel.app/users/engineers', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -44,7 +44,7 @@ const Engineers = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8080/users/${engineerId}`, {
+      const response = await fetch(`https://engineering-resourse-management.vercel.app/users/${engineerId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

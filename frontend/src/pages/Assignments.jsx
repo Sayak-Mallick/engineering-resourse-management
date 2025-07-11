@@ -15,7 +15,7 @@ const Assignments = () => {
   const fetchAssignments = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8080/assignments', {
+      const response = await fetch('https://engineering-resourse-management.vercel.app/assignments', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -37,7 +37,7 @@ const Assignments = () => {
     if (!window.confirm('Are you sure you want to delete this assignment?')) return;
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8080/assignments/${id}`, {
+      const response = await fetch(`https://engineering-resourse-management.vercel.app/assignments/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
